@@ -1,1 +1,6 @@
-*.csv 
+
+# Big Files...
+*.csv
+*.db
+
+.venv/
