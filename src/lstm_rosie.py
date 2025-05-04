@@ -9,8 +9,8 @@ from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import mean_squared_error
 
-df_2019 = pd.read_csv('../run_ww_2019_w.csv')
-df_2020 = pd.read_csv('../run_ww_2020_w.csv')
+df_2019 = pd.read_csv('run_ww_2019_w.csv')
+df_2020 = pd.read_csv('run_ww_2020_w.csv')
 
 
 # convert 2019 objects to correct types
@@ -181,13 +181,13 @@ print(f"LSTM Input Shape: {X.shape}")  # (samples, time_steps, features)
 # --- LSTM Model ---
 model = Sequential()
 
-model.add(LSTM(256, input_shape=(X.shape[1], X.shape[2]), activation='sigmoid'))
+model.add(LSTM(1024, input_shape=(X.shape[1], X.shape[2]), activation='tanh'))
 model.add(Dense(1))  # Output: predict next duration
 model.compile(loss='mse', optimizer='adam')
 model.summary()
 
 # Train the model
-model.fit(X, y, epochs=5, batch_size=64, verbose=1)
+model.fit(X, y, epochs=20, batch_size=64)
 
 X_test_seqs = []
 y_test_targets = []
